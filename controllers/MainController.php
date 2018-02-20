@@ -6,9 +6,9 @@ use Yii;
 use app\models\RegForm;
 use app\models\LoginForm;
 use app\models\User;
+use app\controllers\BehaviorController;
 
-
-class MainController extends \yii\base\Controller {
+class MainController extends BehaviorController {
 
     public function actionReg() {
         $model = new RegForm();
