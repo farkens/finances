@@ -6,7 +6,23 @@ class MoneyController extends MainController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        
+        $accountGroup = \app\models\AccountGroup::find()
+                ->with('account')
+                ->all();
+        
+        
+        return $this->render('index', compact('accountGroup') );
+    }
+    
+    //
+    public function actionAddAccount() {
+        
+    }
+    
+    //Прибыль
+    public function actionIncome(){
+        return $this->render('income');
     }
 
 }

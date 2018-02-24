@@ -39,9 +39,12 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Баланс', 'url' => ['/money/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Счета', 'url' => ['/money/index']],
+            ['label' => 'Прибыль', 'url' => ['/money/income']],
+            ['label' => 'Расход', 'url' => ['/money/about']],
+            ['label' => 'Транзакции', 'url' => ['/money/about']],
+            ['label' => 'Долги', 'url' => ['/money/contact']],
+            ['label' => 'Отчеты', 'url' => ['/money/contact']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/main/login']]
             ) : (
