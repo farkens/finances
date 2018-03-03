@@ -22,7 +22,10 @@ class MoneyController extends MainController
     
     //Прибыль
     public function actionIncome(){
-        return $this->render('income');
+        $income = \app\models\Income::find()
+                ->where(['userID' => \Yii::$app->user->id])
+                ->all();
+        return $this->render('income', compact('income'));
     }
 
 }

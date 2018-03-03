@@ -42,7 +42,7 @@ AppAsset::register($this);
             ['label' => 'Счета', 'url' => ['/money/index']],
             ['label' => 'Прибыль', 'url' => ['/money/income']],
             ['label' => 'Расход', 'url' => ['/money/about']],
-            ['label' => 'Транзакции', 'url' => ['/money/about']],
+            ['label' => 'Календарь', 'url' => ['/money/about']],
             ['label' => 'Долги', 'url' => ['/money/contact']],
             ['label' => 'Отчеты', 'url' => ['/money/contact']],
             Yii::$app->user->isGuest ? (
@@ -63,6 +63,9 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
+        <div class="topBlock">
+            <?= app\components\AccountWidget::widget() ?>
+        </div>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -80,6 +83,7 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+    <script src='/web/js/js.js'></script>
 </body>
 </html>
 <?php $this->endPage() ?>
