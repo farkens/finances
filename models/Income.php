@@ -31,7 +31,7 @@ class Income extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'comment', 'sum', 'date', 'userID', 'accountID'], 'required'],
+            [['name', 'comment', 'sum', 'date', 'accountID'], 'required'],
             [['sum'], 'number'],
             [['date'], 'safe'],
             [['userID', 'accountID'], 'integer'],
