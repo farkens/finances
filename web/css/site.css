@@ -113,3 +113,10 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.filtrs{
+    border: 1px solid rgba(0,0,0,.1);
+    background: #faf7f0;
+    padding: 15px 0;
+    
+}

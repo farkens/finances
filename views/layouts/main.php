@@ -83,7 +83,6 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
-    <script src='/web/js/js.js'></script>
 </body>
 </html>
 <?php $this->endPage() ?>
