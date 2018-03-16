@@ -20,7 +20,6 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -33,7 +32,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-inverse fixed-top navbar-dark bg-dark',
         ],
     ]);
     echo Nav::widget([
@@ -48,14 +47,20 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/main/login']]
             ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+                    [
+                        'label' => Yii::$app->user->identity->username,
+                        'items' => [
+                            ['label' => 'Настройки', 'url' => ['/user/settings']],
+                            '<li>'
+                            . Html::beginForm(['/site/logout'], 'post')
+                            . Html::submitButton(
+                                'Выход (' . Yii::$app->user->identity->username . ')',
+                                ['class' => 'btn btn-link logout']
+                            )
+                            . Html::endForm()
+                            . '</li>'
+                        ]   
+                    ]
             )
         ],
     ]);
@@ -63,9 +68,11 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <div class="topBlock">
-            <?= app\components\AccountWidget::widget() ?>
-        </div>
+        <?php if(!Yii::$app->user->isGuest){ ?>
+            <div class="topBlock">
+                <?= app\components\AccountWidget::widget() ?>
+            </div>
+        <?php } ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

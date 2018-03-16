@@ -52,6 +52,17 @@ $config = [
             ],
         ],
         */
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'css' => ['css/bootstrap.css'],
+                    'js' => ['../../node_modules/bootstrap/dist/js/bootstrap.js'],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

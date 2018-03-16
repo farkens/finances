@@ -32,7 +32,7 @@ class AccountWidget extends Widget
         $incomeSum = \app\models\Income::find()
                 ->select(['SUM(sum) AS sum'])
                 ->where(['userID' => \Yii::$app->user->id])
-                ->where(['between', 'date', $this->date['begin'], $this->date['end']])
+                ->andWhere(['between', 'date', $this->date['begin'], $this->date['end']])
                 ->asArray()
                 ->all();
         //форматируем полученную прибыль
@@ -42,7 +42,7 @@ class AccountWidget extends Widget
         $costSum = \app\models\Costs::find()
                 ->select(['SUM(sum) AS sum'])
                 ->where(['userID' => \Yii::$app->user->id])
-                ->where(['between', 'date', $this->date['begin'], $this->date['end']])
+                ->andWhere(['between', 'date', $this->date['begin'], $this->date['end']])
                 ->asArray()
                 ->all();
         //форматируем полученную прибыль
