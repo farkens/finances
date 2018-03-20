@@ -75,6 +75,18 @@ class MoneyController extends MainController {
         }
     }
     
+    //Календарь
+    public function actionCalendar() {
+        $income = \app\models\Income::find()
+                ->select(['id', 'name', 'comment', 'sum', 'date'])
+                ->where(['userID' => \Yii::$app->user->id])
+                ->asArray()
+                ->all();
+
+        
+        return $this->render('calendar', compact('income'));
+    }
+    
     //Удаление
     public function actionDelete($id)
     {

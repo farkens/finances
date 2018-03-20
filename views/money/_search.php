@@ -31,7 +31,7 @@ $this->registerJs(
                 
     ]);
     ?>
-    <div class="row">
+    <div class="form-row">
         <div class="col-md-3 col-sm-12">
             Сортировка по:
         </div>
@@ -69,7 +69,7 @@ $this->registerJs(
             ?>
         </div>
     </div>
-    <div class="row">
+    <div class="form-row">
         <div class="col-md-3 right">
             <div class="form-group">
                 <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>

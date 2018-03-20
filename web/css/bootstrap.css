@@ -1,4 +1,53 @@
 @charset "UTF-8";
+/*
+V 3.3
+*/
+/*
+V 3.3
+*/
+/*
+V3.3
+*/
+/*
+// Utilities
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/mixins/hover";
+@import "../../node_modules/bootstrap/scss/mixins/image";
+@import "../../node_modules/bootstrap/scss/mixins/badge";
+@import "../../node_modules/bootstrap/scss/mixins/resize";
+@import "../../node_modules/bootstrap/scss/mixins/screen-reader";
+@import "../../node_modules/bootstrap/scss/mixins/size";
+@import "../../node_modules/bootstrap/scss/mixins/reset-text";
+@import "../../node_modules/bootstrap/scss/mixins/text-emphasis";
+@import "../../node_modules/bootstrap/scss/mixins/text-hide";
+@import "../../node_modules/bootstrap/scss/mixins/text-truncate";
+@import "../../node_modules/bootstrap/scss/mixins/visibility";
+
+// // Components
+@import "../../node_modules/bootstrap/scss/mixins/alert";
+@import "../../node_modules/bootstrap/scss/mixins/buttons";
+@import "../../node_modules/bootstrap/scss/mixins/caret";
+@import "../../node_modules/bootstrap/scss/mixins/pagination";
+@import "../../node_modules/bootstrap/scss/mixins/lists";
+@import "../../node_modules/bootstrap/scss/mixins/list-group";
+@import "../../node_modules/bootstrap/scss/mixins/nav-divider";
+@import "../../node_modules/bootstrap/scss/mixins/forms";
+@import "../../node_modules/bootstrap/scss/mixins/table-row";
+
+// // Skins
+@import "../../node_modules/bootstrap/scss/mixins/background-variant";
+@import "../../node_modules/bootstrap/scss/mixins/border-radius";
+@import "../../node_modules/bootstrap/scss/mixins/box-shadow";
+@import "../../node_modules/bootstrap/scss/mixins/gradients";
+@import "../../node_modules/bootstrap/scss/mixins/transition";
+
+// // Layout
+@import "../../node_modules/bootstrap/scss/mixins/clearfix";
+@import "../../node_modules/bootstrap/scss/mixins/navbar-align";
+@import "../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../node_modules/bootstrap/scss/mixins/grid";
+@import "../../node_modules/bootstrap/scss/mixins/float";
+*/
 @-ms-viewport {
   width: device-width; }
 
@@ -1590,7 +1639,7 @@ th {
   .table > tbody + tbody {
     border-top: 2px solid #ddd; }
   .table .table {
-    background-color: #fff; }
+    background-color: #ECFAFB; }
 
 .table-condensed > thead > tr > th,
 .table-condensed > thead > tr > td,
@@ -3842,10 +3891,10 @@ tbody.collapse.in {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25); }
 
 .navbar-inverse {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c3c3c), to(#222));
-  background-image: linear-gradient(to bottom, #3c3c3c 0%, #222 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#004444), to(#011));
+  background-image: linear-gradient(to bottom, #004444 0%, #011 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF3C3C3C', endColorstr='#FF222222', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF004444', endColorstr='#FF001111', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   border-radius: 4px; }
   .navbar-inverse .navbar-nav > .open > a,
@@ -5660,7 +5709,7 @@ body {
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
-  background-color: #fff; }
+  background-color: #ECFAFB; }
 
 input,
 button,
@@ -6157,7 +6206,7 @@ a.label:hover, a.label:focus {
       color: #ccc; }
 
 .navbar-inverse {
-  background-color: #222;
+  background-color: #011;
   border-color: #090909; }
   .navbar-inverse .navbar-brand {
     color: #9d9d9d; }
@@ -6167,7 +6216,7 @@ a.label:hover, a.label:focus {
   .navbar-inverse .navbar-text {
     color: #9d9d9d; }
   .navbar-inverse .navbar-nav > li > a {
-    color: #9d9d9d; }
+    color: gray; }
     .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
       color: #fff;
       background-color: transparent; }
@@ -6185,7 +6234,7 @@ a.label:hover, a.label:focus {
       background-color: #fff; }
   .navbar-inverse .navbar-collapse,
   .navbar-inverse .navbar-form {
-    border-color: #101010; }
+    border-color: black; }
   .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #090909;
     color: #fff; }
@@ -6195,7 +6244,7 @@ a.label:hover, a.label:focus {
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
       background-color: #090909; }
     .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-      color: #9d9d9d; }
+      color: gray; }
       .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
         color: #fff;
         background-color: transparent; }
@@ -6206,11 +6255,11 @@ a.label:hover, a.label:focus {
       color: #444;
       background-color: transparent; } }
   .navbar-inverse .navbar-link {
-    color: #9d9d9d; }
+    color: gray; }
     .navbar-inverse .navbar-link:hover {
       color: #fff; }
   .navbar-inverse .btn-link {
-    color: #9d9d9d; }
+    color: gray; }
     .navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus {
       color: #fff; }
     .navbar-inverse .btn-link[disabled]:hover, .navbar-inverse .btn-link[disabled]:focus,
@@ -6229,7 +6278,7 @@ body {
   padding: 0 0 60px; }
 
 .wrap > .container {
-  padding: 50px 15px 20px; }
+  padding: 15px 15px 20px; }
 
 .footer {
   height: 60px;
@@ -6316,3 +6365,68 @@ a.desc:after {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #faf7f0;
   padding: 15px 0; }
+
+.flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 80px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-bottom: 5px; }
+
+.grid-item {
+  width: 14%;
+  border: 1px solid #000;
+  text-align: center;
+  background-color: #fff; }
+
+/*!
+ * Bootstrap v4.0.0 (https://getbootstrap.com)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+
+
+@import "../../node_modules/bootstrap/scss/functions";
+
+@import "variables";
+@import "mixins";
+@import "utilities";
+
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/tables";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/button-group";
+@import "../../node_modules/bootstrap/scss/input-group";
+@import "../../node_modules/bootstrap/scss/custom-forms";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/navbar";
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../node_modules/bootstrap/scss/breadcrumb";
+@import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/badge";
+@import "../../node_modules/bootstrap/scss/jumbotron";
+@import "../../node_modules/bootstrap/scss/alert";
+@import "../../node_modules/bootstrap/scss/progress";
+@import "../../node_modules/bootstrap/scss/media";
+@import "../../node_modules/bootstrap/scss/list-group";
+@import "../../node_modules/bootstrap/scss/close";
+@import "../../node_modules/bootstrap/scss/modal";
+@import "../../node_modules/bootstrap/scss/tooltip";
+@import "../../node_modules/bootstrap/scss/popover";
+
+@import "../../node_modules/bootstrap/scss/print";
+@import "../../node_modules/bootstrap/scss/carousel";
+
+
+@import "site";
+ */

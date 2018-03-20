@@ -40,8 +40,8 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Счета', 'url' => ['/money/index']],
             ['label' => 'Прибыль', 'url' => ['/money/income']],
-            ['label' => 'Расход', 'url' => ['/money/about']],
-            ['label' => 'Календарь', 'url' => ['/money/about']],
+            ['label' => 'Расход', 'url' => ['/cost/index']],
+            ['label' => 'Календарь', 'url' => ['/money/calendar']],
             ['label' => 'Долги', 'url' => ['/money/contact']],
             ['label' => 'Отчеты', 'url' => ['/money/contact']],
             Yii::$app->user->isGuest ? (
