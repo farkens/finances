@@ -1,3 +1,25 @@
+<?php
+
+$this->registerJs(
+        '$("document").ready(function(){   
+            $(".sortable").sortable({
+                connectWith: ".sortable",
+                placeholder: "placeholder",
+                //Происходит при завершении перемещения элемента пользователем при условии, что порядок элементов был изменен
+                update: function (e, ui) {
+                    console.log(ui.item);
+                },
+                stop: function (event, ui) {
+                    /* Send JSON to the server */
+                    $("#result").html("Send JSON to the server:<pre>ответ</pre>");
+                },
+            });
+            
+        });'
+);
+
+?>
+
 <div class="container">
     <?php
     
@@ -39,7 +61,6 @@
     <?php
     
         //Вывод дней
-
         $curentYear = (int) date('Y');//Текущий год
         $curentMonth = date('m');//текущий месяц
         $curentDay = date('d');//текущий день
@@ -77,7 +98,8 @@
                 $calendar .= "<div class = 'grid-item'>" . ( ($countDayCurentMonth == $curentDay) ? ('<span style="color:red">' . date('d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear ) )  . '</span>' ) : date('d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear ) ) ) . $result . "</div>";
             }else{
                 //продолжаем заполнять следующим месяцем
-                $calendar .= "<div class = 'grid-item'>" .  date('d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) . "</div>";
+                $result = search_array($income, date('Y-m-d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ));
+                $calendar .= "<div class = 'grid-item'>" . date('d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) . $result  . "</div>";
             }
             $countDayCurentMonth++;
             $grid++;
@@ -91,18 +113,20 @@
             
         }
         echo $calendar;
-        
         //$result = search_array($income, '2018-02-21');
         
         function search_array($array, $value){
-            $content = '';
+            $content = "<ul class='sortable'>";
             for($i = 0; $i <= count($array) - 1; $i++){
                 if(array_search($value, $array[$i])){                   
-                    $content .= "<div>{$array[$i]['name']}<div>{$array[$i]['sum']}</div></div>";
+                    $content .= "<li class='sortable_item' date={$array[$i]['id']}>{$array[$i]['name']}<div>{$array[$i]['sum']}</div></li>";
                 }
             }
+            $content .= '</ul>';
             return $content;
         } 
     ?>
+    
+    <div id="result"></div>
     
 </div>
