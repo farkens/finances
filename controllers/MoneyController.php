@@ -74,6 +74,27 @@ class MoneyController extends MainController {
             ]);
         }
     }
+
+    public function beforeAction($action) {
+        if($action->id == 'edit'){
+            $this->enableCsrfValidation = FALSE;
+        }
+        return parent::beforeAction($action);
+    }
+
+    
+    //Редактировать
+    public function actionEdit()
+    {
+        if(\Yii::$app->request->isAjax){
+            $model = \app\models\Income::findOne(\Yii::$app->request->post('id'));
+            $model->date = \Yii::$app->request->post('date');
+            if($model->save()){
+                 return 'отредактированно';
+            }
+        }
+       
+    }
     
     //Календарь
     public function actionCalendar() {
