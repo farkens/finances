@@ -6361,6 +6361,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
   outline: none; }
 
+li {
+  list-style: none; }
+
 .filtrs {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #faf7f0;
@@ -6391,14 +6394,19 @@ a.desc:after {
 
 .sortable_item {
   list-style: none !important;
-  border: 1px solid #000;
   margin: 2px; }
 
 .placeholder {
-  background-color: #bfb;
+  background-color: #959e98;
   border: 1px dashed #666;
   height: 58px;
   margin-bottom: 5px; }
+
+.sortable_item-income {
+  border: 1px solid #00f14a; }
+
+.sortable_item-cost {
+  border: 1px solid #f10000; }
 
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)

@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 
 /**
  * This is the model class for table "income".
@@ -15,14 +14,14 @@ use Yii;
  * @property integer $userID
  * @property integer $accountID
  */
-class Income extends \yii\db\ActiveRecord
+class Finance extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'income';
+        return 'finance';
     }
 
     /**

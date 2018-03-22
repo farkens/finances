@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Income */
+/* @var $model app\models\Finance */
 
 $this->title = 'Update Income: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Incomes', 'url' => ['index']];

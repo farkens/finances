@@ -25,7 +25,7 @@ $this->registerJs(
     <?php Pjax::begin(['id' => 'filter_income']); ?>
     <?php
     $form = ActiveForm::begin([
-                'action' => ['income'],
+                'action' => ['finance'],
                 'method' => 'get',
                 'options' => ['data-pjax' => true, 'name' => 'income-form',]
                 

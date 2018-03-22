@@ -9,10 +9,11 @@ $this->registerJs(
                 update: function (e, ui) {
                     var id = ui.item.attr("id");//ID перемещаеммого объекта
                     var date = $(this).parents(".grid-item").attr("date");//дата родителя куда перенесли
+                    var cost = ui.item.attr("cost");//переменная для определения расходов
                     $.ajax({
                         url: "index.php?r=money%2Fedit",
                         type:"post",
-                        data: { "id":id, "date":date },
+                        data: { "id":id, "date":date, "cost":cost },
                         success: function( data ) {
                             $("#result").html("Send JSON to the server:<pre>" + data + "</pre>");
                         },
@@ -20,6 +21,7 @@ $this->registerJs(
 
                         }
                     });
+
                 },
             });
         });'
@@ -92,7 +94,11 @@ $this->registerJs(
             
             while ($weekdayFierstWeek >= 0 ){
                 //вывести остатки дней за прошлый месяц
-                $result = search_array($income, date('Y-m-d', mktime(0, 0, 0, $curentMonth - 1, $beginDayBeforeMonthForGrid, $curentYear)));
+                //Дата этого дння в формате Y-m-d
+                $curentDate = date('Y-m-d', mktime(0, 0, 0, $curentMonth - 1, $beginDayBeforeMonthForGrid, $curentYear));
+                $result_income = search_array($income, $curentDate );
+                $result_cost = search_array($cost, $curentDate, true);
+                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul>';
                 $calendar .= "<div class = 'grid-item' date='" . date('Y-m-d', mktime(0, 0, 0, $curentMonth - 1, $beginDayBeforeMonthForGrid, $curentYear)) . "'>" .  $beginDayBeforeMonthForGrid  . $result . "</div>";
                 $beginDayBeforeMonthForGrid++;
                 $weekdayFierstWeek--;
@@ -101,11 +107,19 @@ $this->registerJs(
             }
             //выводим текущий месяц
             if($countDayCurentMonth <= $countDayThisMonth ){
-                $result = search_array($income, date('Y-m-d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear)));
+                //Дата этого дння в формате Y-m-d
+                $curentDate = date('Y-m-d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear));
+                $result_income = search_array($income, $curentDate);
+                $result_cost = search_array($cost, $curentDate, true);
+                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul>';
                 $calendar .= "<div class = 'grid-item' date='" . date('Y-m-d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear)) . "'>" . ( ($countDayCurentMonth == $curentDay) ? ('<span style="color:red">' . date('d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear ) )  . '</span>' ) : date('d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear ) ) ) . $result . "</div>";
             }else{
                 //продолжаем заполнять следующим месяцем
-                $result = search_array($income, date('Y-m-d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ));
+                //Дата этого дння в формате Y-m-d
+                $curentDate = date('Y-m-d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) );
+                $result_income = search_array($income, $curentDate);
+                $result_cost = search_array($cost, $curentDate, true);
+                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul>';
                 $calendar .= "<div class = 'grid-item' date='" . date('Y-m-d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) . "'>" . date('d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) . $result  . "</div>";
             }
             $countDayCurentMonth++;
@@ -122,14 +136,13 @@ $this->registerJs(
         echo $calendar;
         //$result = search_array($income, '2018-02-21');
         
-        function search_array($array, $value){
-            $content = "<ul class='sortable'>";
+        function search_array($array, $value, $cost = false){
+            $content = '';
             for($i = 0; $i <= count($array) - 1; $i++){
                 if(array_search($value, $array[$i])){                   
-                    $content .= "<li class='sortable_item' id='{$array[$i]['id']}'>{$array[$i]['name']}<div>{$array[$i]['sum']}</div></li>";
+                    $content .= "<li class='sortable_item " . ($cost ? 'sortable_item-cost': 'sortable_item-income') . "' id='{$array[$i]['id']}'" . ($cost ? 'cost="1"' : null) . ">{$array[$i]['name']}<div>{$array[$i]['sum']}</div></li>";
                 }
             }
-            $content .= '</ul>';
             return $content;
         } 
     ?>

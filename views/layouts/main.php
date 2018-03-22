@@ -39,7 +39,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Счета', 'url' => ['/money/index']],
-            ['label' => 'Прибыль', 'url' => ['/money/income']],
+            ['label' => 'Прибыль', 'url' => ['/money/finance']],
             ['label' => 'Расход', 'url' => ['/cost/index']],
             ['label' => 'Календарь', 'url' => ['/money/calendar']],
             ['label' => 'Долги', 'url' => ['/money/contact']],

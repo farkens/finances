@@ -29,7 +29,7 @@ class AccountWidget extends Widget
         
         
         //Считаем сумму прибыли за указанный период времени
-        $incomeSum = \app\models\Income::find()
+        $incomeSum = \app\models\Finance::find()
                 ->select(['SUM(sum) AS sum'])
                 ->where(['userID' => \Yii::$app->user->id])
                 ->andWhere(['between', 'date', $this->date['begin'], $this->date['end']])

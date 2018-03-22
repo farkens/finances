@@ -18,7 +18,7 @@ class MoneyController extends MainController {
     public function actionAddIncome() {
 
 
-        $model = new \app\models\Income();
+        $model = new \app\models\Finance();
         if ($model->load(\Yii::$app->request->post())) {
             if ($model->validate()) {
                 $model->save();
@@ -41,9 +41,9 @@ class MoneyController extends MainController {
     }
 
     //Прибыль
-    public function actionIncome() {
+    public function actionFinance() {
 
-        $model = new \app\models\Income();
+        $model = new \app\models\Finance();
 
         //Достать все счета для выбора в форме добавления
         $accounts = \app\models\account::find()
@@ -52,13 +52,13 @@ class MoneyController extends MainController {
                 ->asArray()
                 ->all();
 
-        $income = \app\models\Income::find()
+        $income = \app\models\Finance::find()
                 ->where(['userID' => \Yii::$app->user->id])
                 ->all();
         $searchModel = new \app\models\IncomeSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
-        return $this->render('income', compact('income', 'model', 'accounts', 'searchModel', 'dataProvider'));
+        return $this->render('finance', compact('income', 'model', 'accounts', 'searchModel', 'dataProvider'));
     }
     
     //Редактировать
@@ -74,7 +74,7 @@ class MoneyController extends MainController {
             ]);
         }
     }
-
+    //отменяем CSRF у экшена edit
     public function beforeAction($action) {
         if($action->id == 'edit'){
             $this->enableCsrfValidation = FALSE;
@@ -87,25 +87,42 @@ class MoneyController extends MainController {
     public function actionEdit()
     {
         if(\Yii::$app->request->isAjax){
-            $model = \app\models\Income::findOne(\Yii::$app->request->post('id'));
-            $model->date = \Yii::$app->request->post('date');
-            if($model->save()){
-                 return 'отредактированно';
+            if(\Yii::$app->request->post('cost')){
+                $model = \app\models\Costs::findOne(\Yii::$app->request->post('id'));
+                $model->date = \Yii::$app->request->post('date');
+                if($model->save()){
+                     return 'отредактированна таблица расходов';
+                }else{
+                    return 'некая ошибка';
+                }
+            }else{
+                $model = \app\models\Finance::findOne(\Yii::$app->request->post('id'));
+                $model->date = \Yii::$app->request->post('date');
+                if($model->save()){
+                     return 'отредактированна таблица прибыли';
+                }else{
+                    return 'некая ошибка';
+                }
             }
+            
         }
        
     }
     
     //Календарь
     public function actionCalendar() {
-        $income = \app\models\Income::find()
+        $income = \app\models\Finance::find()
                 ->select(['id', 'name', 'comment', 'sum', 'date'])
                 ->where(['userID' => \Yii::$app->user->id])
                 ->asArray()
                 ->all();
-
+        $cost = \app\models\Costs::find()
+                ->select(['id', 'name', 'comment', 'sum', 'date'])
+                ->where(['userID' => \Yii::$app->user->id])
+                ->asArray()
+                ->all();
         
-        return $this->render('calendar', compact('income'));
+        return $this->render('calendar', compact('income', 'cost'));
     }
     
     //Удаление
@@ -125,7 +142,7 @@ class MoneyController extends MainController {
      */
     protected function findModel($id)
     {
-        if (($model = \app\models\Income::findOne($id)) !== null) {
+        if (($model = \app\models\Finance::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
