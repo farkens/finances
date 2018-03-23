@@ -42,18 +42,13 @@ $this->registerJs(
         'options' => ['class' => 'calendar-form-horizontal'],
         'method' => 'get',
     ]) ?>
-<?php
-    //вспомогательные переменные
-    ($curentYear ? $yearVal = $curentYear : $yearVal = (int) date('Y') );
-    ($curentMonth ? $monthVal = $curentMonth : $monthVal = (int) date('m') );
-    
-?>
-        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => $yearVal - 1, 'month' => $monthVal]) . "'><</a>" ?>
-        <?= Html::submitButton($yearVal, ['name' => 'show', 'value' => 'year']) ?>
-        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => $yearVal + 1, 'month' => $monthVal]) . "'>></a>" ?>
-        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => $yearVal, 'month' => $monthVal - 1]) . "'><</a>" ?>
-        <?= Html::submitButton(date('F', mktime(0, 0, 0, $monthVal, 1, $yearVal )), ['name' => 'show', 'value' => 'month']) ?>
-        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => $yearVal, 'month' => $monthVal + 1]) . "'>></a>" ?>
+        <?php //доделать листание дат годов когда мы находимся в выборе года! ?>
+        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => ( ($show == 'year') ? $show : ''), 'year' => $curentYear - ( ($show == 'year') ? 18 : 1), 'month' => $curentMonth]) . "'><</a>" ?>
+        <?= Html::submitButton($curentYear, ['name' => 'show', 'value' => 'year']) ?>
+        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => ( ($show == 'year') ? $show : ''), 'year' => $curentYear + ( ($show == 'year') ? 24 : 1), 'month' => $curentMonth]) . "'>></a>" ?>
+        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => $curentYear, 'month' => $curentMonth - 1]) . "'><</a>" ?>
+        <?= Html::submitButton(date('F', mktime(0, 0, 0, $curentMonth, 1, $curentYear )), ['name' => 'show', 'value' => 'month']) ?>
+        <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => $curentYear, 'month' => $curentMonth + 1]) . "'>></a>" ?>
         <?= "<a href='" . yii\helpers\Url::toRoute(['', 'show' => '', 'year' => '', 'month' => '']) . "'>Сегодня</a>" ?>
     
     <?php
@@ -67,7 +62,7 @@ $this->registerJs(
     <?php
     if(Yii::$app->request->get('show') == 'year'){
         //Показываем выбор года
-        $curentYear = $yearVal;
+
         //$countYear = $curentYear - 42;//начинаем года - (6*7)
         $countYear = $curentYear - 18;//начинаем года - (6*7)
         $calendar = '';
@@ -85,8 +80,6 @@ $this->registerJs(
     
     }elseif(Yii::$app->request->get('show') == 'month'){
         //Вывод месяцев в году
-        
-        $curentMonth = date('F');
 
         $calendar = '';
         for ($row = 0; $row <= 1; $row++) {
@@ -103,8 +96,8 @@ $this->registerJs(
         $tooday = date('Y-m-d');
         //($curentYear ? $curentYear : $curentYear = (int) date('Y')); //Текущий год
         //($curentMonth ? $curentMonth : $curentMonth = date('m')); //текущий месяц
-        $curentYear = $yearVal; //Текущий год
-        $curentMonth = $monthVal; //текущий месяц
+        $curentYear = $curentYear; //Текущий год
+        $curentMonth = $curentMonth; //текущий месяц
         //день недели 1 числа текущего месяца. - 2
         $weekdayFierstWeek = date('N', mktime(0, 0, 0, $curentMonth, 1, $curentYear)) - 2;
         //Число дней в прошлом месяце

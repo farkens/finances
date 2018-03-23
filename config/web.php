@@ -59,8 +59,13 @@ $config = [
                     'basePath' => '@webroot',
                     'baseUrl' => '@web',
                     'css' => ['css/bootstrap.css'],
-                    'js' => ['../../node_modules/bootstrap/dist/js/bootstrap.js'],
+                    'js' => ['../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js'],
                 ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js'=>[
+                        
+                    ]
+                 ],
             ],
         ],
     ],

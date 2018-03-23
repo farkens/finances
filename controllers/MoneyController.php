@@ -109,6 +109,11 @@ class MoneyController extends MainController {
        
     }
     
+    public function actionReports() {
+
+        return $this->render('reports');
+    }
+    
     //Календарь
     public function actionCalendar() {
         $income = \app\models\Finance::find()
@@ -121,9 +126,10 @@ class MoneyController extends MainController {
                 ->where(['userID' => \Yii::$app->user->id])
                 ->asArray()
                 ->all();
-        $curentYear = (int) \Yii::$app->request->get('year');
-        $curentMonth = \Yii::$app->request->get('month');
-        return $this->render('calendar', compact('income', 'cost', 'curentYear', 'curentMonth'));
+        (\Yii::$app->request->get('year') ? $curentYear = \Yii::$app->request->get('year') : $curentYear = (int) date('Y') );
+        (\Yii::$app->request->get('month') ? $curentMonth = \Yii::$app->request->get('month') : $curentMonth = (int) date('m') );
+        (\Yii::$app->request->get('show') ? $show = \Yii::$app->request->get('show') : $show = '' );
+        return $this->render('calendar', compact('income', 'cost', 'curentYear', 'curentMonth', 'show'));
     }
     
     //Удаление
