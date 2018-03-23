@@ -121,8 +121,9 @@ class MoneyController extends MainController {
                 ->where(['userID' => \Yii::$app->user->id])
                 ->asArray()
                 ->all();
-        
-        return $this->render('calendar', compact('income', 'cost'));
+        $curentYear = (int) \Yii::$app->request->get('year');
+        $curentMonth = \Yii::$app->request->get('month');
+        return $this->render('calendar', compact('income', 'cost', 'curentYear', 'curentMonth'));
     }
     
     //Удаление

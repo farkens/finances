@@ -6394,12 +6394,13 @@ li {
 
 .sortable_item {
   list-style: none !important;
-  margin: 2px; }
+  margin: 2px;
+  cursor: pointer; }
 
 .placeholder {
   background-color: #959e98;
   border: 1px dashed #666;
-  height: 58px;
+  height: 40px;
   margin-bottom: 5px; }
 
 .sortable_item-income {
@@ -6407,6 +6408,12 @@ li {
 
 .sortable_item-cost {
   border: 1px solid #f10000; }
+
+.week_day {
+  min-height: 0; }
+
+.week_day > .grid-item {
+  background-color: #666; }
 
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
