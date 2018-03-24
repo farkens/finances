@@ -29,6 +29,16 @@ class BehaviorController extends \yii\web\Controller
                         'controllers' => ['money'],
                         'roles' => ['@'],
                     ],
+                    [
+                        'allow' => true,
+                        'controllers' => ['cost'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'controllers' => ['user'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

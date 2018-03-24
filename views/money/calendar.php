@@ -15,7 +15,7 @@ $this->registerJs(
                     var date = $(this).parents(".grid-item").attr("date");//дата родителя куда перенесли
                     var cost = ui.item.attr("cost");//переменная для определения расходов
                     $.ajax({
-                        url: "index.php?r=money%2Fedit",
+                        url: "/money/edit",
                         type:"post",
                         data: { "id":id, "date":date, "cost":cost },
                         success: function( data ) {

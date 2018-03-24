@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/jquery-ui.js',
+        '../node_modules/chart.js/dist/Chart.min.js',
         'js/js.js',
     ];
     public $depends = [
