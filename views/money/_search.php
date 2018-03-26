@@ -32,9 +32,11 @@ $this->registerJs(
     ]);
     ?>
     <div class="form-row">
-        <div class="col-md-3 col-sm-12">
+        <div class="col-sm-12">
             Сортировка по:
         </div>
+    </div>
+    <div class="form-row">
         <div class="col-md-3 col-sm-12">
             <?php //$form->field($model, 'name') ?>
             <?php

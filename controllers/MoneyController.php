@@ -126,11 +126,66 @@ class MoneyController extends MainController {
                 ->where(['userID' => \Yii::$app->user->id])
                 ->asArray()
                 ->all();
-        (is_int( \Yii::$app->request->get('year')) ? $curentYear = \Yii::$app->request->get('year') : $curentYear = (int) date('Y') );
+        //добавить проверку на ввод пользователя других значений
+        (\Yii::$app->request->get('year') ? $curentYear = \Yii::$app->request->get('year') : $curentYear = (int) date('Y') );
         (\Yii::$app->request->get('month') ? $curentMonth = \Yii::$app->request->get('month') : $curentMonth = (int) date('m') );
         (\Yii::$app->request->get('show') ? $show = \Yii::$app->request->get('show') : $show = '' );
         return $this->render('calendar', compact('income', 'cost', 'curentYear', 'curentMonth', 'show'));
     }
+    /*=============================Вывод графиков===================================*/
+    //за год
+    public function actionYear() {
+        if(\Yii::$app->request->isAjax){
+            if( \Yii::$app->request->get('id') === 'year'){
+                //SELECT date_format(date, "%Y-%m"), sum(`sum`) FROM `finance` WHERE userID = '1' GROUP BY date_format(date, "%Y-%m")
+                ( checkdate(1, 1, \Yii::$app->request->get('year')) ? $year = \Yii::$app->request->get('year') : $year = date('Y'));
+                $data = \app\models\Finance::find()
+                            ->select(['DATE_FORMAT(date, "%Y-%m")  as mydate','SUM(sum) as sum' ])
+                            ->where(['userID' => \Yii::$app->user->id])
+                            ->andWhere(['YEAR(`date`)' => $year])
+                            ->groupBy('mydate')
+                            ->indexBy('mydate')
+                            ->asArray()
+                            ->all();
+                $costs = \app\models\Costs::find()
+                            ->select(['DATE_FORMAT(date, "%Y-%m")  as mydate','SUM(sum) as sum' ])
+                            ->where(['userID' => \Yii::$app->user->id])
+                            ->andWhere(['YEAR(`date`)' => $year])
+                            ->groupBy('mydate')
+                            ->indexBy('mydate')
+                            ->asArray()
+                            ->all();
+                return json_encode($this->groupeArray($data, $costs));
+            }else{
+                return FALSE;
+            }
+        }   
+
+    }
+    
+    
+    //$arr1 - массив с прибылью ; $arr2 - массив с расходами 
+    protected function groupeArray($arr1, $arr2){
+        //перебираем массив с прибылью и записываем в массив с расходами
+        foreach ($arr1 as $k => $val){
+            if(array_key_exists($k, $arr2) ){
+                $arr2[$k] =  [$arr2[$k], $val];
+            }else{
+                //если нету такой даты
+                $arr2[$k] =  [0, $val];
+            }
+        }
+        
+        //находим ключи которых нету 
+        $diff_arr = array_diff_key($arr2, $arr1);
+        foreach ($diff_arr as $k => $val){
+            $arr2[$k] =  [$val, 0];
+        }
+        ksort($arr2);
+        return $arr2;
+    }
+
+
     
     //Удаление
     public function actionDelete($id)

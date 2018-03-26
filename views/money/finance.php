@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->title = 'finance';
+$this->title = 'Прмбыль';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

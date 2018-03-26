@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-1">
-            <a href="<?= yii\helpers\Url::to(['money/add-income']) ?>">Add</a>
+            <a class='btn btn-success' href="<?= yii\helpers\Url::to(['money/add-income']) ?>">Добавить</a>
         </div>
     </div>
     <div class="row">
