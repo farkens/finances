@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
         <?= $form->field($model, 'date')->textInput() ?>
 
-        <?= $form->field($model, 'userID')->textInput() ?>
+        <?php //$form->field($model, 'userID')->textInput() ?>
 
         <?= $form->field($model, 'accountID')->textInput() ?>
 

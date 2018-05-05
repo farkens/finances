@@ -42,7 +42,8 @@ class IncomeSearch extends Finance
      */
     public function search($params)
     {
-        $query = Finance::find();
+        $query = Finance::find()
+                ->where(['userID' => \Yii::$app->user->id]);
 
         // add conditions that should always apply here
 

@@ -2,6 +2,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
 $this->registerJs(
         '$("document").ready(function(){
@@ -30,8 +31,6 @@ $this->registerJs(
             });
         });'
 );
-
-
 
 ?>
 
@@ -134,7 +133,7 @@ $this->registerJs(
                 $curentDate = date('Y-m-d', mktime(0, 0, 0, $curentMonth - 1, $beginDayBeforeMonthForGrid, $curentYear));
                 $result_income = search_array($income, $curentDate );
                 $result_cost = search_array($cost, $curentDate, true);
-                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul>';
+                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul><a href="' . \yii\helpers\Url::to(['money/add-income', 'date' => $curentDate]) . '" title="Добавить прибыль">+</a><a href="' . \yii\helpers\Url::to(['cost/add-cost', 'date' => $curentDate]) . '" title="Добавить расход">-</a>';
                 $calendar .= "<div class='grid-item' date='" . date('Y-m-d', mktime(0, 0, 0, $curentMonth - 1, $beginDayBeforeMonthForGrid, $curentYear)) . "'>" . ( ($tooday == $curentDate) ? ('<span style="color:red">' . $beginDayBeforeMonthForGrid . '</span>' ) : $beginDayBeforeMonthForGrid ) . $result . "</div>";
                 $beginDayBeforeMonthForGrid++;
                 $weekdayFierstWeek--;
@@ -147,7 +146,7 @@ $this->registerJs(
                 $curentDate = date('Y-m-d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear));
                 $result_income = search_array($income, $curentDate);
                 $result_cost = search_array($cost, $curentDate, true);
-                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul>';
+                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul><a href="' . \yii\helpers\Url::to(['money/add-income', 'date' => $curentDate]) . '" title="Добавить прибыль">+</a><a href="' . \yii\helpers\Url::to(['cost/add-cost', 'date' => $curentDate]) . '" title="Добавить расход">-</a>';
                 $calendar .= "<div class='grid-item' date='" . date('Y-m-d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear)) . "'>" . ( ($tooday == $curentDate) ? ('<span style="color:red">' . date('d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear ) ) . '</span>' ) : date('d', mktime(0, 0, 0, $curentMonth, $countDayCurentMonth, $curentYear ) ) ) . $result . "</div>";
             }else{
                 //продолжаем заполнять следующим месяцем
@@ -155,7 +154,7 @@ $this->registerJs(
                 $curentDate = date('Y-m-d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) );
                 $result_income = search_array($income, $curentDate);
                 $result_cost = search_array($cost, $curentDate, true);
-                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul>';
+                $result = "<ul class='sortable'>" . $result_income . $result_cost . '</ul><a href="' . \yii\helpers\Url::to(['money/add-income', 'date' => $curentDate]) . '" title="Добавить прибыль">+</a><a href="' . \yii\helpers\Url::to(['cost/add-cost', 'date' => $curentDate]) . '" title="Добавить расход">-</a>';
                 $calendar .= "<div class='grid-item' date='" . date('Y-m-d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) . "'>" . ( ($tooday == $curentDate) ? ('<span style="color:red">' . date('d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) . '</span>' ) : date('d', mktime(0, 0, 0, $curentMonth + 1, ($countDayCurentMonth - $countDayThisMonth), $curentYear ) ) )  . $result  . "</div>";
             }
             $countDayCurentMonth++;

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php
             //Вызываем кнопку с модальным окном
             Modal::begin([
-                'header' => '<h2>Hello world</h2>',
+                'header' => '<h2>Добавить прибыль</h2>',
                 'toggleButton' => ['label' => 'Добавить', 'class' => 'btn btn-success'],
             ]);
 
@@ -27,13 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' => ['class' => 'MyForm'],
             ]);
 
-            echo "<h2>Добавить прибыль:</h2>";
-
-            //массив всех счатов пользователя
-            $arrAccount;
-            foreach ($accounts as $item) {
-                $arrAccount[$item['id']] = $item['name'];
-            }
+            
             echo $form->field($model, 'name')->label('Наименование');
             echo $form->field($model, 'sum')->label('Сумма');
             echo $form->field($model, 'date')->label('Дата')->widget(kartik\widgets\DatePicker::className(), [

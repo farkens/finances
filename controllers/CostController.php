@@ -5,30 +5,15 @@ namespace app\controllers;
 use Yii;
 use app\models\Costs;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\controllers\BehaviorController;
 
 /**
  * CostController implements the CRUD actions for Costs model.
  */
-class CostController extends Controller
+class CostController extends BehaviorController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Costs models.
      * @return mixed
@@ -36,12 +21,64 @@ class CostController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Costs::find(),
+            'query' => Costs::find()->where(['userID' => \Yii::$app->user->id]),
         ]);
+        $model = new Costs();
 
+        //Достать все счета для выбора в форме добавления
+        $accounts = \app\models\account::find()
+                ->select(['id', 'name'])
+                ->where(['userID' => \Yii::$app->user->id])
+                ->asArray()
+                ->all();
+        //массив всех счатов пользователя
+        $arrAccount;
+        foreach ($accounts as $item) {
+            $arrAccount[$item['id']] = $item['name'];
+        }
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'model' => $model,
+            'accounts' => $arrAccount
         ]);
+    }
+    
+    public function actionAddCost() {
+
+
+        $model = new Costs();
+        //зполняем поле автоматически
+        $model->userID = Yii::$app->user->id;
+        
+        if($model->load(\Yii::$app->request->post())){
+            if ($model->validate()) {
+                if($model->save()){
+                    return $this->goBack();
+                }else{
+                    debug($model->errors);
+                }
+                
+            } else {
+                // validation failed: $errors is an array containing error messages
+                debug($model->errors);
+            }
+        }
+        //Достать все счета для выбора в форме добавления
+        $accounts = \app\models\account::find()
+                ->select(['id', 'name'])
+                ->where(['userID' => \Yii::$app->user->id])
+                ->asArray()
+                ->all();
+        $arrAccount;
+        foreach ($accounts as $item){
+            $arrAccount[$item['id']] = $item['name'];
+        }
+        
+        return $this->render('addCost', [
+                    'model' => $model,
+                    'arrAccount' => $arrAccount,
+        ]);
+        
     }
 
     /**
@@ -62,6 +99,7 @@ class CostController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+  /*  
     public function actionCreate()
     {
         $model = new Costs();
@@ -74,7 +112,8 @@ class CostController extends Controller
             'model' => $model,
         ]);
     }
-
+   * 
+   */
     /**
      * Updates an existing Costs model.
      * If update is successful, the browser will be redirected to the 'view' page.

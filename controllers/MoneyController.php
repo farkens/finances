@@ -51,14 +51,22 @@ class MoneyController extends MainController {
                 ->where(['userID' => \Yii::$app->user->id])
                 ->asArray()
                 ->all();
+        
+        //массив всех счатов пользователя
+            $arrAccount;
+            foreach ($accounts as $item) {
+                $arrAccount[$item['id']] = $item['name'];
+            }
 
         $income = \app\models\Finance::find()
                 ->where(['userID' => \Yii::$app->user->id])
                 ->all();
+        //тут проблема с выборкой
+        
         $searchModel = new \app\models\IncomeSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
-        return $this->render('finance', compact('income', 'model', 'accounts', 'searchModel', 'dataProvider'));
+        return $this->render('finance', compact('income', 'model', 'arrAccount', 'searchModel', 'dataProvider'));
     }
     
     //Редактировать

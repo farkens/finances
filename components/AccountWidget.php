@@ -2,7 +2,6 @@
 namespace app\components;
 
 use yii\base\Widget;
-use yii\helpers\Html;
 
 class AccountWidget extends Widget
 {
@@ -36,7 +35,8 @@ class AccountWidget extends Widget
                 ->asArray()
                 ->all();
         //форматируем полученную прибыль
-        $income = money_format('%.2n', $incomeSum[0]['sum']);
+        //$income = money_format('%.2n', $incomeSum[0]['sum']);
+        $income = $incomeSum[0]['sum'];
         
         //Считаем сумму расходов за указанный период времени
         $costSum = \app\models\Costs::find()
@@ -46,7 +46,8 @@ class AccountWidget extends Widget
                 ->asArray()
                 ->all();
         //форматируем полученную прибыль
-        $cost = money_format('%.2n', $costSum[0]['sum']);
+        //$cost = money_format('%.2n', $costSum[0]['sum']);
+        $cost = $costSum[0]['sum'];
         
         return $this->render('account', compact('accountGroup', 'income', 'cost'));
     }
